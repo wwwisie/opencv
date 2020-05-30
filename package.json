@@ -1,12 +1,12 @@
 {
-  "name": "project_name",
+  "name": "opencv",
   "version": "1.0.0",
-  "description": "DESCRIPCION.",
+  "description": "OpenCV project",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Raúl Acosta",
+  "author": "wwwisie",
   "license": "UNLICENSED",
   "devDependencies": {
     "autoprefixer": "^9.7.4",
