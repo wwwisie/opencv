@@ -1,0 +1,132 @@
+header {
+  position: fixed;
+  width: 100%;
+  height: 80px;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  transition: border 0.4s ease-in-out;
+
+  nav {
+    @include list-unstyled;
+    margin-bottom: 0;
+
+    li {
+      display: inline-block;
+      a {
+        transition: opacity 0.3s ease;
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+
+  .logo {
+    display: inline-block;
+    margin: auto;
+    height: 100%;
+    z-index: 99;
+    position: relative;
+    width: auto;
+
+    img {
+      height: 27px;
+      width: 155px;
+    }
+  }
+
+  nav {
+    // margin-left: 30px;
+
+    li {
+      &:not(:last-child) {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .container-fluid,
+  .row {
+    height: 100%;
+  }
+}
+
+header {
+  &.active-background {
+    // border-bottom: 1px solid black;
+  }
+}
+
+#burger-menu {
+  position: absolute;
+  left: 13px;
+  // top: 29px;
+  width: 23px;
+  height: 25px;
+  z-index: 99;
+  cursor: pointer;
+
+  span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #0b0b0b;
+    transition: background-color 0.25s, transform 0.25s;
+    -webkit-transition: background-color 0.25s, -webkit-transform 0.25s;
+
+    &:nth-of-type(1) {
+      top: 25%;
+    }
+
+    &:nth-of-type(4) {
+      top: 75%;
+    }
+
+    &:nth-of-type(2),
+    &:nth-of-type(3) {
+      top: 50%;
+    }
+  }
+
+  &.open {
+    span {
+      background-color: #0b0b0b;
+
+      &:nth-of-type(1),
+      &:nth-of-type(4) {
+        transform: scaleX(0);
+        -webkit-transform: scaleX(0);
+      }
+
+      &:nth-of-type(2) {
+        transform: rotate(-45deg);
+        -webkit-transform: scaleX(-45deg);
+      }
+      &:nth-of-type(3) {
+        transform: rotate(45deg);
+        -webkit-transform: scaleX(45deg);
+      }
+    }
+  }
+}
+
+.header-menu {
+  display: none;
+  width: 305px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 80px;
+  background: white;
+}
+
+@include media-breakpoint-down(md) {
+}
+@include media-breakpoint-down(sm) {
+  header {
+    width: 100%;
+  }
+}

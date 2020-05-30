@@ -1,0 +1,18 @@
+svg:not(:root) {
+  overflow: hidden;
+}
+
+svg[role='icon']{
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  vertical-align: middle;
+}
+
+.logo{
+  width: 167px;
+  height: 46px;
+  display: inline-block;
+  @include fill-color($white);
+}

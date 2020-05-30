@@ -1,0 +1,30 @@
+{
+  "name": "project_name",
+  "version": "1.0.0",
+  "description": "DESCRIPCION.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Raúl Acosta",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "autoprefixer": "^9.7.4",
+    "browser-sync": "^2.26.7",
+    "cssnano": "^4.1.7",
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^1.0.1",
+    "gulp-cache": "0.2.8",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-minify-css": "1.0.0",
+    "gulp-plumber": "^0.6.6",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-sass": "3.0.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-ssi": "^0.1.5"
+  },
+  "dependencies": {
+    "node-sass": "^4.13.1"
+  }
+}

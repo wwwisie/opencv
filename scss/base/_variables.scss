@@ -1,0 +1,211 @@
+//
+// Root variables
+//
+
+// Colors
+$white: #fff;
+$off-white: #F8F8F8;
+
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black: #000;
+
+// Custom colors
+$night: #313131;
+$error: red;
+
+// Custom Backgrounds
+@include bg-variant(".bg-white", $white);
+
+
+// Base variables
+$body-background-color: $white;
+$body-text-color: $night;
+$title-text-color: $night;
+$placeholder-color: $night;
+$mobile-nav-bg: $night;
+
+
+$root-font-family: "Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+$font-size-base: 1rem; /* 1rem = 10px */
+$border-width: 1px !default;
+
+// Spacer
+$spacer: 2rem !default;
+$spacers: ()
+!default;
+$spacers: map-merge((0: 0, 1: ($spacer * .25), 2: ($spacer * .5), 3: $spacer, 4: ($spacer * 1.5), 5: ($spacer * 3)), $spacers);
+
+// Lists
+
+$list-inline-padding: .5rem;
+
+// Figures
+
+$figure-caption-font-size: $font-size-base * 1.4;
+$figure-caption-color: $gray-600;
+
+// Transitions
+$bezier: cubic-bezier(.445, .5, .55, .95);
+
+// Types
+$font-body: 'Scto Grotesk A';
+$font-secondary: '';
+$font-title: 'Scto Grotesk A';
+$font-script: '';
+
+$headings-font-family: $font-title;
+$headings-font-weight: normal;
+$headings-color: $title-text-color;
+
+$hr-margin-top: 1.1rem;
+$hr-margin-bottom: 1.8rem;
+$hr-border-width: $border-width;
+// $hr-border-color: $swirl;
+
+%type-body {
+  font-family: $font-body;
+  font-weight: normal;
+  font-style : normal;
+}
+
+%type-secondary {
+  font-family: $font-secondary;
+  font-weight: normal;
+  font-style : normal;
+}
+
+%type-title {
+  font-family: $font-title;
+  font-weight: normal;
+  font-style : normal;
+}
+
+//
+// Animations
+//
+// Btn menu mobile open
+@-webkit-keyframes before-btn-animation-close {
+  0% {
+    transform: translateY(-8px) rotate(0deg);
+  }
+  55% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(45deg);
+  }
+}
+@keyframes before-btn-animation-close {
+  0% {
+    transform: translateY(-8px) rotate(0deg);
+  }
+  55% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(45deg);
+  }
+}
+@-webkit-keyframes after-btn-animation-close {
+  0% {
+    transform: translateY(7px) rotate(0deg);
+  }
+  55% {
+    transform: translateY(-1px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-1px) rotate(135deg);
+  }
+}
+@keyframes after-btn-animation-close {
+  0% {
+    transform: translateY(7px) rotate(0deg);
+  }
+  55% {
+    transform: translateY(-1px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-1px) rotate(135deg);
+  }
+}
+
+// Btn menu mobile close
+@-webkit-keyframes before-btn-animation-open {
+  0% {
+    transform: translateY(0px) rotate(45deg);
+  }
+  55% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-8px) rotate(0deg);
+  }
+}
+@keyframes before-btn-animation-open {
+  0% {
+    transform: translateY(0px) rotate(45deg);
+  }
+  55% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-8px) rotate(0deg);
+  }
+}
+@-webkit-keyframes after-btn-animation-open {
+  0% {
+    transform: translateY(px) rotate(135deg);
+  }
+  55% {
+    transform: translateY(-1px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(7px) rotate(0deg);
+  }
+}
+@keyframes after-btn-animation-open {
+  0% {
+    transform: translateY(-1px) rotate(135deg);
+  }
+  55% {
+    transform: translateY(-1px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(7px) rotate(0deg);
+  }
+}
+
+@-webkit-keyframes fade-in-top {
+  0% {
+    -webkit-transform: translateY(-50%);
+    transform        : translateY(-50%);
+    opacity          : 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform        : translateY(0);
+    opacity          : 1;
+  }
+}
+@keyframes fade-in-top {
+  0% {
+    -webkit-transform: translateY(-50%);
+    transform        : translateY(-50%);
+    opacity          : 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0);
+    transform        : translateY(0);
+    opacity          : 1;
+  }
+}

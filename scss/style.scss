@@ -1,0 +1,33 @@
+// Frameworks
+@import 'fonts/fonts';
+@import 'vendor/bootstrap/bootstrap';
+@import 'vendor/swiper/swiper';
+
+@import 'base/variables';
+@import "base/mixins";
+
+@import 'base/spacing';
+@import 'base/fonts';
+@import 'base/root';
+@import 'base/animation';
+@import 'base/type';
+@import 'base/svg';
+
+// Import Components
+@import 'components/footer';
+@import 'components/header';
+@import 'components/loader';
+@import 'components/menu';
+@import 'components/icons';
+@import 'components/form';
+@import 'components/modal';
+
+// Import Layouts
+@import 'layouts/home';
+@import 'layouts/splash';
+@import 'layouts/error';
+
+// Plugins
+@import 'plugins/utilities';
+//@import 'plugins/dev';
+

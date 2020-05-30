@@ -1,0 +1,27 @@
+.container,
+.fluid-container {
+  outline: 2px dotted blue !important;
+}
+
+.baseline-grid {
+  pointer-events     : none;
+  height             : 100%;
+  width              : 100vw;
+  position           : fixed;
+  background-image   : url("//basehold.it/i/21");
+  background-position: top;
+}
+
+footer,
+header,
+nav,
+section {
+  * {
+    @extend %expose;
+  }
+}
+
+%expose {
+  outline   : 1px dotted rgba(255,0,0,.5) !important;
+  background: rgba(255,0,0,.0125);
+}

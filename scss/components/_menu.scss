@@ -1,0 +1,122 @@
+// Mobile menu
+
+.mobile-menu{
+  position: relative;
+  visibility: hidden;
+  opacity: 0;
+  transition: .35s;
+  z-index: 11;
+  color: $white;
+}
+
+.menu__overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  outline: 0;
+  z-index: 11;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { 
+    display: none;
+  }
+}
+
+.menu__container{
+  @include make-row();
+  width: 320px;
+  height: 100%;
+  position: fixed;
+  overflow-y: scroll;
+  background-color: $night;
+  margin: auto;
+  padding-bottom: 2.5rem;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { 
+    display: none;
+  }
+}
+
+.menu__header,
+.menu__content,
+.menu__footer{
+  @include make-col-ready();
+  @include make-col(12, 12);
+  @include link;
+}
+.menu__header{
+  padding: 2.5rem 1.5rem;
+}
+.menu__content{
+  align-self: flex-start;
+}
+.menu__footer{
+  align-self: flex-end;
+}
+
+.mobile-menu-nav{
+  font-size: 3.4rem;
+  line-height: 8rem;
+  letter-spacing: -0.09rem;
+  padding-top: 2rem;
+  border-top: .1rem solid $white;
+
+  svg[role="icon"] { vertical-align: baseline; }
+}
+
+.mobile-menu.open {
+  visibility: visible;
+  opacity: 1;
+
+  .mobile-menu-nav{
+    li{
+      animation: fade-in-top .5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    }
+    @for $i from 1 to 10 {
+      li:nth-child(#{$i}) {
+        animation-delay: $i * 0.135s;
+      }
+    }
+  }
+}
+
+$height-line: 1px;
+
+.mobile-btn {
+  @extend %transition;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor        : pointer;
+  z-index       : 10;
+  width         : 26px;
+  height        : 17px;
+
+  .nav-btn {
+    height    : $height-line;
+    width     : 20px;
+    background: $night;
+    transform: translateY(8px);
+    @extend %transition;
+
+    &::after,
+    &::before {
+      @extend %transition;
+
+      content   : ' ';
+      display   : block;
+      height    : $height-line;
+      width     : 26px;
+      background: $night;
+    }
+
+    &::before {
+      animation: before-btn-animation-open 1s ease both;
+    }
+
+    &::after {
+      animation: after-btn-animation-open 1s ease both;
+    }
+  }
+}

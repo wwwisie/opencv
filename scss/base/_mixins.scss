@@ -1,0 +1,20 @@
+@mixin header-variant($header-name, $color-primary){
+  .header-#{$header-name}{
+    color: $color-primary;
+    svg{ 
+      fill: $color-primary; 
+      stroke: $color-primary;
+    }
+    .mobile-btn .nav-btn{
+      &, &::before, &::after{
+        background-color: $color-primary;
+      }
+    }
+  }
+}
+@mixin stroke-color($color){
+  stroke: $color;
+}
+@mixin fill-color($color){
+  fill: $color;
+}

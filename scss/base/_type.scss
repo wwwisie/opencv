@@ -1,0 +1,160 @@
+// stylelint-disable declaration-no-important, selector-list-comma-newline-after
+
+//
+// Headings
+//
+
+@mixin h1 {
+  font-family: $headings-font-family;
+  font-size: 4rem;
+  line-height: 4.6rem;
+  letter-spacing: -.1rem;
+  font-weight: $headings-font-weight;
+}
+h1, .h1 { @include h1; }
+
+@mixin h2 {
+  font-family: $headings-font-family;
+  font-size: 2.5rem;
+  line-height: 3rem;
+  letter-spacing: -.03rem;
+  font-weight: $headings-font-weight;
+}
+h2, .h2 { @include h2; }
+
+@mixin h3 {
+  font-family: $headings-font-family;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  letter-spacing: -.03rem;
+  font-weight: $headings-font-weight;
+}
+h3, .h3 { @include h3; }
+
+@mixin h4 {
+  font-family: $headings-font-family;
+  font-size: 1.3rem;
+  line-height: 1.6rem;
+  letter-spacing: 0rem;
+  font-weight: $headings-font-weight;
+}
+h4, .h4 { @include h4; }
+
+@mixin h5 {
+  font-family: $headings-font-family;
+  font-size: 1.6rem;
+  line-height: 2rem;
+  letter-spacing: -.011rem;
+  font-weight: bold;
+}
+h5, .h5 { @include h5; }
+
+//
+// Custom classes
+//
+@mixin link{
+  font-size: 1.6rem;
+  line-height: 2rem;
+  letter-spacing: .009rem;
+}
+.link{ @include link; }
+
+@mixin foot-note{
+  font-size: 1.3rem;
+  line-height: 1.6rem;
+  letter-spacing: 0rem;
+}
+.foot-note { @include foot-note; }
+
+.text-box{
+  h4 + p,
+  h4 + div{ margin-top: .5rem; }
+}
+
+ul{
+  @include list-unstyled;
+  margin-bottom: 0;
+}
+
+ol {
+  counter-reset: item;
+  margin-left: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  
+  li {
+    display: block;
+    padding-left: 1.6rem;
+    position: relative;
+  }
+  li::before {
+    content: "";
+    width: 8px;
+    height: 7px;
+    margin-right: .8rem;
+    text-align: left;
+    position: absolute;
+    top: 5px;
+    left: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='8px' height='7px' viewBox='0 0 8 7' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='diseño' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='Depas-Detalle' transform='translate(-15.000000, -2022.000000)'%3E%3Crect fill='%23FFFFFF' x='0' y='0' width='320' height='4115'%3E%3C/rect%3E%3Cg id='Room-1' transform='translate(15.000000, 500.000000)' fill='%23F95F33'%3E%3Cg id='Texts' transform='translate(0.000000, 86.000000)'%3E%3Cg id='2' transform='translate(0.000000, 1405.000000)'%3E%3Cg id='Bullets' transform='translate(0.000000, 31.000000)'%3E%3Cg id='Detalle/Naranja'%3E%3Cg id='Detalle'%3E%3Crect id='Rectangle' x='2' y='0' width='4' height='1.6'%3E%3C/rect%3E%3Crect id='Rectangle' x='2' y='4.8' width='4' height='1.6'%3E%3C/rect%3E%3Crect id='Rectangle' x='0' y='2.4' width='8' height='1.6'%3E%3C/rect%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+}
+
+//
+// Horizontal rules
+//
+
+hr {
+  margin-top: $hr-margin-top;
+  margin-bottom: $hr-margin-bottom;
+  border: 0;
+  border-top: $hr-border-width solid $hr-border-color;
+}
+
+//
+// Lists
+//
+
+.list-unstyled {
+  @include list-unstyled;
+  margin-bottom: 0;
+}
+
+.list-styled{
+  li{
+    position: relative;
+    padding-left: 2rem;
+    &::before{
+      content: "";
+      width: 10px;
+      height: 10px;
+      background-color: $white;
+      position: absolute;
+      top: 5px;
+      left: 0;
+      border-radius: 50%;
+    }
+    @include media-breakpoint-down(sm){
+      padding-left: 1.4rem;
+      &::before{
+        content: "";
+        width: 8px;
+        height: 8px;
+      }
+    }
+  }
+}
+// Inline turns list items into inline-block
+.list-inline {
+  @include list-unstyled;
+}
+.list-inline-item {
+  display: inline-block;
+
+  &:not(:last-child) {
+    margin-right: $list-inline-padding;
+  }
+}
