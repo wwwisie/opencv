@@ -43,11 +43,11 @@ var site = {
 
 function ready() {
   // Load Partials
-  $("header").load("./partials/_header.html");
-  $("footer").load("./partials/_footer.html");
+  // $("header").load("./partials/_header.html");
+  // $("footer").load("./partials/_footer.html");
 
   // Load Modals
-  $("#modal-01").load("./modals/_modal.html");
+  // $("#modal-01").load("./modals/_modal.html");
 
   scroll();
 }

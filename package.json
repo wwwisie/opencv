@@ -25,6 +25,18 @@
     "gulp-ssi": "^0.1.5"
   },
   "dependencies": {
+    "canvas": "^2.6.1",
+    "jimp": "^0.12.1",
+    "jsdom": "^16.2.2",
     "node-sass": "^4.13.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wwwisie/opencv.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/wwwisie/opencv/issues"
+  },
+  "homepage": "https://github.com/wwwisie/opencv#readme"
 }

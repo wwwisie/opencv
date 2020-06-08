@@ -1,10 +1,10 @@
-html{
+html {
   font-size: 62.5%;
   @extend %font-smoothing;
   scroll-behavior: smooth;
   background-color: $body-background-color;
 }
-body{
+body {
   @extend %type-body;
   @extend %font-smoothing;
   background: $body-background-color;
@@ -13,24 +13,28 @@ body{
   font-size: 16px;
   font-size: 1.6rem;
   line-height: 2rem;
-  letter-spacing: .009rem;
+  letter-spacing: 0.009rem;
 }
 
 main {
   opacity: 0;
 }
-.body-no-scroll{
+.body-no-scroll {
   overflow: hidden;
 }
-a:not([href]):not([tabindex]){
+a:not([href]):not([tabindex]) {
   cursor: pointer;
 }
 
-@include header-variant('black', $night);
-@include header-variant('white', $white);
+@include header-variant("black", $night);
+@include header-variant("white", $white);
 
-@include media-breakpoint-down(lg){
-  .container{
+@include media-breakpoint-down(lg) {
+  .container {
     max-width: 1080px;
   }
+}
+
+img {
+  max-width: 300px;
 }
