@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>OpenCV.js Video Processing</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/98.css@0.1.16/dist/98.css">
+</head>
+
+<body>
+    <div id="info" class="text-center">
+        OpenCV.js is loading...
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center py-60">
+            <div class="col-12 text-center pb-45">
+                <h3>Procesador de Video</h3>
+            </div>
+            <div class="col-6">
+                <ul class="nav justify-content-center">
+                    <li class="nav-item px-5">
+                        <button>
+                            <a href="./index.html">Reconocimiento de Imagen</a>
+                        </button>
+                    </li>
+                    <li class="nav-item px-5">
+                        <button class="active">
+                            <a href="#">Procesador de Video</a>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-12 text-center">
+            </div>
+            <div class="col-12">
+            </div>
+        </div>
+        <div class="row pb-60 justify-content-center">
+            <div class="invisible d-none">
+                <div class="window ml-auto">
+                    <div class="title-bar">
+                        <div class="title-bar-text">VIDEO - INPUT</div>
+                        <div class="title-bar-controls">
+                            <button aria-label="Minimize"></button>
+                            <button aria-label="Maximize"></button>
+                            <button aria-label="Close"></button>
+                        </div>
+                    </div>
+                    <div class="window-body">
+                        <div class="">
+                            <video id="video" class="hidden">Your browser does not support the video tag.</video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="window mx-auto py-25">
+                    <div class="title-bar">
+                        <div class="title-bar-text">⚠️ EFECTOS DE VIDEO ⚠️</div>
+                        <div class="title-bar-controls">
+                            <button aria-label="Minimize"></button>
+                            <button aria-label="Maximize"></button>
+                            <button aria-label="Close"></button>
+                        </div>
+                    </div>
+                    <div class="window-body py-25">
+                        <div class="text-center d-flex justify-content-center pb-25">
+                            <h5>
+                                <span>
+                                    Current Filter:
+                                </span>
+                            </h5>
+                            <h5 class="pl-10">
+                                <span id="filterName">
+                                    Pass Through
+                                </span>
+                            </h5>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div id="guiContainer"></div>
+                            <div class="pl-15" style="width: 400px">
+                                <div id="container">
+                                    <canvas class="center-block" id="canvasOutput" width=100 height=100></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/libs/adapter-latest.js"></script>
+    <script src="/js/libs/stats.min.js"></script>
+    <script src="/js/libs/dat.gui.min.js"></script>
+    <script src="/js/libs/utils.js"></script>
+    <script>
+        var featuresReady = checkFeatures(document.getElementById("info"), { webrtc: true });
+    </script>
+    <script src="js/video.js"></script>
+    <script async src="/js/build/asm.js/opencv.js" onload="opencvIsReady()"></script>
+</body>
+
+</html>

@@ -2,18 +2,39 @@ html {
   font-size: 62.5%;
   @extend %font-smoothing;
   scroll-behavior: smooth;
-  background-color: $body-background-color;
+  background-color: #c0c0c0;
 }
 body {
   @extend %type-body;
   @extend %font-smoothing;
-  background: $body-background-color;
+  background: #c0c0c0;
   color: $body-text-color;
 
   font-size: 16px;
   font-size: 1.6rem;
   line-height: 2rem;
   letter-spacing: 0.009rem;
+}
+
+.title-bar,
+.window,
+button,
+input,
+label,
+option,
+select,
+textarea,
+ul.tree-view {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+a {
+  color: inherit !important;
+}
+
+button.active {
+  box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080;
 }
 
 main {
