@@ -104,7 +104,10 @@ function processVideo() {
   let eyes = [];
   let bodies = [];
   let size;
-  console.log(detectFace.checked, detectEye.checked, detectBody.checked)
+
+  /*
+  // (if) detect face checkbox is checked do the following
+  */ 
   if (detectFace.checked) {
     let faceVect = new cv.RectVector();
     let faceMat = new cv.Mat();
@@ -136,6 +139,10 @@ function processVideo() {
     faceMat.delete();
     faceVect.delete();
   }
+  
+  /*
+  // (if) detect eyes checkbox is checked do the following
+  */
   if (detectEye.checked) {
     let eyeVect = new cv.RectVector();
     let eyeMat = new cv.Mat();
@@ -149,6 +156,10 @@ function processVideo() {
     eyeMat.delete();
     eyeVect.delete();
   }
+
+  /*
+  // (if) detect body checkbox is checked do the following
+  */
   if (detectBody.checked) {
     // create rectvector
     let bodyVect = new cv.RectVector();
@@ -180,6 +191,9 @@ function processVideo() {
   requestAnimationFrame(processVideo);
 }
 
+/*
+// (drawResults) Draws face results.
+*/ 
 function drawResults(ctx, results, color, size) {
   for (let i = 0; i < results.length; ++i) {
     let rect = results[i];
@@ -194,6 +208,9 @@ function drawResults(ctx, results, color, size) {
   }
 }
 
+/*
+// (drawEyeResults) Draws Eyes results.
+*/ 
 function drawEyeResults(ctx, results, color, size) {
   for (let i = 0; i < results.length; ++i) {
     let rect = results[i];
@@ -208,6 +225,9 @@ function drawEyeResults(ctx, results, color, size) {
   }
 }
 
+/*
+// (drawBodyResults) Draws Body results.
+*/ 
 function drawBodyResults(ctx, results, color, size) {
   for (let i = 0; i < results.length; ++i) {
     let rect = results[i];
