@@ -1,10 +1,6 @@
 let width = 0;
 let height = 0;
 
-// let qvga = {width: {exact: 320}, height: {exact: 240}};
-
-// let vga = {width: {exact: 640}, height: {exact: 480}};
-
 let qvga = { width: { exact: 400 }, height: { exact: 250 } };
 
 let vga = { width: { exact: 400 }, height: { exact: 250 } };
@@ -48,6 +44,7 @@ function startCamera() {
 
 let lastFilter = '';
 let src = null;
+/*CANVAS DESTINATION OUTPUT*/
 let dstC1 = null;
 let dstC3 = null;
 let dstC4 = null;
@@ -62,27 +59,44 @@ function startVideoProcessing() {
   requestAnimationFrame(processVideo);
 }
 
+// This function creates a bypass passthrough.
 function passThrough(src) {
   return src;
 }
 
+/*
+// (gray) Converts an image from one color space to another.
+*/ 
 function gray(src) {
   cv.cvtColor(src, dstC1, cv.COLOR_RGBA2GRAY);
   return dstC1;
 }
 
+/*
+// (hsv) Converts an image from one color space to another.
+*/ 
 function hsv(src) {
   cv.cvtColor(src, dstC3, cv.COLOR_RGBA2RGB);
   cv.cvtColor(dstC3, dstC3, cv.COLOR_RGB2HSV);
   return dstC3;
 }
 
+/*
+// (canny) Edge detection.
+*/ 
 function canny(src) {
   cv.cvtColor(src, dstC1, cv.COLOR_RGBA2GRAY);
+  /* Canny Params:
+   * (image,edges,threshold1,threshold2,apertureSize,L2gradient)
+   **/
   cv.Canny(dstC1, dstC1, controls.cannyThreshold1, controls.cannyThreshold2, controls.cannyApertureSize, controls.cannyL2Gradient);
   return dstC1;
 }
 
+
+/*
+// (inRange) Checks if array elements lie between the elements of two other arrays.
+*/
 function inRange(src) {
   let lowValue = controls.inRangeLow;
   let lowScalar = new cv.Scalar(lowValue, lowValue, lowValue, 255);
@@ -90,79 +104,149 @@ function inRange(src) {
   let highScalar = new cv.Scalar(highValue, highValue, highValue, 255);
   let low = new cv.Mat(height, width, src.type(), lowScalar);
   let high = new cv.Mat(height, width, src.type(), highScalar);
+
+  /* inRange Params:
+   * (image, lower boundary, upper boundary, destination canvas)
+   **/
   cv.inRange(src, low, high, dstC1);
   low.delete(); high.delete();
   return dstC1;
 }
 
+/*
+// (threshold) Applies a fixed-level threshold to each array element.
+*/
 function threshold(src) {
+  /* threshold Params:
+   * (image, destination canvas, thresh, maxval, type)
+   **/
   cv.threshold(src, dstC4, controls.thresholdValue, 200, cv.THRESH_BINARY);
   return dstC4;
 }
 
+/*
+// (adaptiveThreshold) Applies an adaptive threshold to an array.
+*/
 function adaptiveThreshold(src) {
   let mat = new cv.Mat(height, width, cv.CV_8U);
   cv.cvtColor(src, mat, cv.COLOR_RGBA2GRAY);
+
+  /* adaptiveThreshold Params:
+  * (src mat, destination canvas, maxValue, adaptiveMethod, thresholdType, blockSize, constant)
+  **/
   cv.adaptiveThreshold(mat, dstC1, 200, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, Number(controls.adaptiveBlockSize), 2);
   mat.delete();
   return dstC1;
 }
 
+/*
+// (gaussianBlur) Blurs an image using a Gaussian filter.
+*/
 function gaussianBlur(src) {
+  /* gaussianBlur Params:
+  * (src, destination canvas, size (height,width), sigmaX, sigmaY, borderType)
+  **/
   cv.GaussianBlur(src, dstC4, {width: controls.gaussianBlurSize, height: controls.gaussianBlurSize}, 0, 0, cv.BORDER_DEFAULT);
   return dstC4;
 }
 
+/*
+// (bilateralFilter) Applies the bilateral filter to an image.
+*/
 function bilateralFilter(src) {
   let mat = new cv.Mat(height, width, cv.CV_8UC3);
   cv.cvtColor(src, mat, cv.COLOR_RGBA2RGB);
+
+  /* bilateralFilter Params:
+  * (src mat, destination canvas, pixel diameter, sigmaColor, sigmaSpace, borderType)
+  **/
   cv.bilateralFilter(mat, dstC3, controls.bilateralFilterDiameter, controls.bilateralFilterSigma, controls.bilateralFilterSigma, cv.BORDER_DEFAULT);
   mat.delete();
   return dstC3;
 }
 
+/*
+// (medianBlur) Applies the bilateral filter to an image.
+*/
 function medianBlur(src) {
+  /* medianBlur Params:
+  * (src, destination canvas, aperture linear size)
+  * apperture: must be odd and greater than 1, for example: 3, 5, 7.
+  **/
   cv.medianBlur(src, dstC4, controls.medianBlurSize);
   return dstC4;
 }
 
+/*
+// (sobel) Calculates the first, second, third, or mixed image derivatives using an extended Sobel operator.
+*/
 function sobel(src) {
   var mat = new cv.Mat(height, width, cv.CV_8UC1);
   cv.cvtColor(src, mat, cv.COLOR_RGB2GRAY, 0);
+
+  /* sobel Params:
+  * (src mat, destination canvas, output depth, derivativeX, derivativeY, sobel kernel, scale, delta, borderType)
+  **/
   cv.Sobel(mat, dstC1, cv.CV_8U, 1, 0, controls.sobelSize, 1, 0, cv.BORDER_DEFAULT);
   mat.delete();
   return dstC1;
 }
 
+/*
+// (scharr) Calculates the first x- or y- image derivative using Scharr operator.
+*/
 function scharr(src) {
   var mat = new cv.Mat(height, width, cv.CV_8UC1);
   cv.cvtColor(src, mat, cv.COLOR_RGB2GRAY, 0);
+
+  /* scharr Params:
+  * (src mat, destination canvas, output depth, dX, dY, scale, delta, borderType)
+  **/
   cv.Scharr(mat, dstC1, cv.CV_8U, 1, 0, 1, 0, cv.BORDER_DEFAULT);
   mat.delete();
   return dstC1;
 }
 
+/*
+// (laplacian) calculates the Laplacian of the source image by adding up the second x and y derivatives calculated using the Sobel operator.
+*/
 function laplacian(src) {
   var mat = new cv.Mat(height, width, cv.CV_8UC1);
   cv.cvtColor(src, mat, cv.COLOR_RGB2GRAY);
+
+  /* laplacian Params:
+  * (src mat, destination canvas, output depth, aperture size, scale, delta, borderType)
+  **/
   cv.Laplacian(mat, dstC1, cv.CV_8U, controls.laplacianSize, 1, 0, cv.BORDER_DEFAULT);
   mat.delete();
   return dstC1;
 }
+
 
 let contoursColor = [];
 for (let i = 0; i < 10000; i++) {
   contoursColor.push([Math.round(Math.random() * 255), Math.round(Math.random() * 255), Math.round(Math.random() * 255), 0]);
 }
 
+/*
+// (contours) Finds contours in a binary image.
+*/
 function contours(src) {
   cv.cvtColor(src, dstC1, cv.COLOR_RGBA2GRAY);
   cv.threshold(dstC1, dstC4, 120, 200, cv.THRESH_BINARY);
   let contours  = new cv.MatVector();
   let hierarchy = new cv.Mat();
+
+  /* findContours Params:
+  * (src dst, contours, hierarchy, mode, method, offset)
+  **/
   cv.findContours(dstC4, contours, hierarchy, Number(controls.contoursMode), Number(controls.contoursMethod), {x: 0, y: 0});
   dstC3.delete();
   dstC3 = cv.Mat.ones(height, width, cv.CV_8UC3);
+
+  /* drawContours Params:
+  * (src dst, contours, contourIdx, color, thickness, lineType, hierarchy)
+  **/
   for (let i = 0; i<contours.size(); ++i)
   {
     let color = contoursColor[i];
@@ -172,6 +256,9 @@ function contours(src) {
   return dstC3;
 }
 
+/*
+// (calcHist) Calculates a histogram of a set of arrays.
+*/
 function calcHist(src) {
   cv.cvtColor(src, dstC1, cv.COLOR_RGBA2GRAY);
   let srcVec = new cv.MatVector();
@@ -179,6 +266,10 @@ function calcHist(src) {
   let scale = 2;
   let channels = [0], histSize = [src.cols/scale], ranges = [0,255];
   let hist = new cv.Mat(), mask = new cv.Mat(), color = new cv.Scalar(0xfb, 0xca, 0x04, 0xff);
+
+  /* calcHist Params:
+  * (src, channels, mask, hist, dims, histSize, ranges)
+  **/
   cv.calcHist(srcVec, channels, mask, hist, histSize, ranges);
   let result = cv.minMaxLoc(hist, mask);
   var max = result.maxVal;
@@ -195,14 +286,22 @@ function calcHist(src) {
   return dstC4;
 }
 
+/*
+// (equalizeHist) Equalizes the histogram of a grayscale image.
+*/
 function equalizeHist(src) {
   cv.cvtColor(src, dstC1, cv.COLOR_RGBA2GRAY, 0);
+  /* equalizeHist Params:
+  * (src input, destination)
+  **/
   cv.equalizeHist(dstC1, dstC1);
   return dstC1;
 }
 
+/*
+// (backprojection) Calculates the back projection of a histogram.
+*/
 let base;
-
 function backprojection(src) {
   if (lastFilter !== 'backprojection') {
     if (base instanceof cv.Mat)
@@ -220,9 +319,17 @@ function backprojection(src) {
     ranges = [controls.backprojectionRangeLow, controls.backprojectionRangeHigh];
   else
     return src;
+
+  // (calcHist) Calculates a histogram of a set of arrays.
   cv.calcHist(baseVec, channels, mask, hist, histSize, ranges);
+  // Normalize the histogram so that the sum of histogram bins is 255
   cv.normalize(hist, hist, 0, 255, cv.NORM_MINMAX);
+
+  /* calcBackProject Params:
+  * (src input, channels, hist, backProject, ranges, scale)
+  **/
   cv.calcBackProject(targetVec, channels, hist, dstC1, ranges, 1);
+
   baseVec.delete();
   targetVec.delete();
   mask.delete();
@@ -230,26 +337,44 @@ function backprojection(src) {
   return dstC1;
 }
 
+/*
+// (erosion) Erodes an image by using a specific structuring element.
+*/
 function erosion(src) {
   let kernelSize = controls.erosionSize;
   let kernel = cv.Mat.ones(kernelSize, kernelSize, cv.CV_8U);
   let color = new cv.Scalar();
+
+  /* erode Params:
+  * (src input, destination, kernel, default anchor, iterations, borderType, borderValue)
+  **/
   cv.erode(src, dstC4, kernel, {x: -1, y: -1}, 1, Number(controls.erosionBorderType), color);
   kernel.delete();
   return dstC4;
 }
 
+/*
+// (dilation) Dilates an image by using a specific structuring element.
+*/
 function dilation(src) {
   let kernelSize = controls.dilationSize;
   let kernel = cv.Mat.ones(kernelSize, kernelSize, cv.CV_8U);
   let color = new cv.Scalar();
+
+  /* dilate Params:
+  * (src input, destination, kernel, default anchor, iterations, borderType, borderValue)
+  **/
   cv.dilate(src, dstC4, kernel, {x: -1, y: -1}, 1, Number(controls.dilationBorderType), color);
   kernel.delete();
   return dstC4;
 }
 
+/*
+// (dilation) Dilates an image by using a specific structuring element.
+*/
 function morphology(src) {
   let kernelSize = controls.morphologySize;
+  // Returns a structuring element of the specified size and shape for morphological operations
   let kernel = cv.getStructuringElement(Number(controls.morphologyShape), {width: kernelSize, height: kernelSize});
   let color = new cv.Scalar();
   let op = Number(controls.morphologyOp);
@@ -258,6 +383,10 @@ function morphology(src) {
     cv.cvtColor(src, dstC3, cv.COLOR_RGBA2RGB);
     image = dstC3;
   }
+
+  /* dilate Params:
+  * (src input, destination, morph operator, kernel, anchor, iterations, borderType, borderValue)
+  **/
   cv.morphologyEx(image, dstC4, op, kernel, {x: -1, y: -1}, 1, Number(controls.morphologyBorderType), color);
   kernel.delete();
   return dstC4;
