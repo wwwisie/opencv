@@ -25,7 +25,7 @@ Gulp Watch
 ## Built With
 * [Opencv](http://www.dropwizard.io/1.0.2/docs/) - Open Source Computer Vision
 
-## Authors
+## Author
 * **Gómez Carlos** - *wwwisie* - [gomezcarlos.com](https://gomezcarlos.com/)
 
 ## Contributing
