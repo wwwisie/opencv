@@ -19,7 +19,7 @@ npm install --global gulp-cli
 
 ## Running Dev
 ```
-Gulp Watch
+gulp watch
 ```
 
 ## Built With
