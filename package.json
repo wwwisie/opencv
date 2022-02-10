@@ -28,7 +28,7 @@
     "canvas": "^2.6.1",
     "jimp": "^0.12.1",
     "jsdom": "^16.2.2",
-    "node-sass": "^4.13.1"
+    "node-sass": "^7.0.0"
   },
   "repository": {
     "type": "git",
